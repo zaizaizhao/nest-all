@@ -79,4 +79,16 @@ export class UserService {
     }
     return user;
   }
+
+  async findByUsername(username: string) {
+    const user = await this.entityManager.findOne(User, {
+      where: {
+        username,
+      },
+      relations: {
+        permissions: true,
+      },
+    });
+    return user;
+  }
 }

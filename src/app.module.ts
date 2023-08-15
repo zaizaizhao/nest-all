@@ -7,12 +7,13 @@ import { Permission } from './user/entities/permission.entity';
 import { User } from './user/entities/user.entity';
 import { AaaModule } from './aaa/aaa.module';
 import { BbbModule } from './bbb/bbb.module';
+import { RedisModule } from './redis/redis.module';
 @Module({
   imports: [
     TypeOrmModule.forRoot({
       type: 'mysql',
       host: 'localhost',
-      port: 3307,
+      port: 3306,
       username: 'root',
       password: '111111',
       database: 'acl_test',
@@ -28,6 +29,7 @@ import { BbbModule } from './bbb/bbb.module';
     UserModule,
     AaaModule,
     BbbModule,
+    RedisModule,
   ],
   controllers: [AppController],
   providers: [AppService],

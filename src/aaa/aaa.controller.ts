@@ -7,6 +7,7 @@ import {
   Param,
   Delete,
   UseGuards,
+  SetMetadata,
 } from '@nestjs/common';
 import { LoginGuard } from 'src/login.guard';
 import { PermissionGuard } from 'src/user/permission.guard';
@@ -26,11 +27,13 @@ export class AaaController {
 
   @Get()
   @UseGuards(LoginGuard, PermissionGuard)
+  @SetMetadata('permission', 'query_aaa')
   findAll() {
     return this.aaaService.findAll();
   }
 
   @Get(':id')
+  @SetMetadata('permission', 'query_aaa')
   @UseGuards(LoginGuard, PermissionGuard)
   findOne(@Param('id') id: string) {
     return this.aaaService.findOne(+id);
@@ -38,11 +41,13 @@ export class AaaController {
 
   @Patch(':id')
   @UseGuards(LoginGuard, PermissionGuard)
+  @SetMetadata('permission', 'update_aaa')
   update(@Param('id') id: string, @Body() updateAaaDto: UpdateAaaDto) {
     return this.aaaService.update(+id, updateAaaDto);
   }
 
   @Delete(':id')
+  @SetMetadata('permission', 'remove_aaa')
   @UseGuards(LoginGuard, PermissionGuard)
   remove(@Param('id') id: string) {
     return this.aaaService.remove(+id);
